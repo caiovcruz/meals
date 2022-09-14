@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../models/meal.dart';
@@ -35,10 +37,24 @@ class CategoryMealDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final meal = ModalRoute.of(context)?.settings.arguments as Meal;
+    bool isFavorite = Random().nextBool();
+    final themeColors = Theme.of(context).colorScheme;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
+        actions: [
+          IconButton(
+            color: isFavorite
+                ? themeColors.secondary
+                : HSLColor.fromColor(themeColors.primary)
+                    .withLightness(0.1)
+                    .toColor()
+                    .withOpacity(0.6),
+            icon: const Icon(Icons.favorite),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
