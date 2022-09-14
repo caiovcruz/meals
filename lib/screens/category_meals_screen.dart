@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../components/meal_item.dart';
+import '../components/category_meal_item.dart';
 import '../data/dummy_data.dart';
 import '../models/category.dart';
 
-class CategoriesMealsScreen extends StatelessWidget {
-  const CategoriesMealsScreen({
+class CategoryMealsScreen extends StatelessWidget {
+  const CategoryMealsScreen({
     Key? key,
   }) : super(key: key);
 
@@ -24,7 +24,7 @@ class CategoriesMealsScreen extends StatelessWidget {
       body: ListView.builder(
         itemCount: categoryMeals.length,
         itemBuilder: (context, index) {
-          return MealItem(
+          return CategoryMealItem(
             meal: categoryMeals[index],
           );
         },
