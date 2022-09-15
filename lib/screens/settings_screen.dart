@@ -50,54 +50,80 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         title: const Text('Settings'),
       ),
-      body: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(20),
-            child: Text(
-              'Settings',
-              style: Theme.of(context).textTheme.headline6,
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+                border: Border.all(
+                  color: Colors.grey,
+                ),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                ),
+              ),
+              padding: const EdgeInsets.all(20),
+              child: Text(
+                'Settings',
+                style: Theme.of(context).textTheme.headline6,
+              ),
             ),
-          ),
-          Expanded(
-            child: ListView(
-              children: [
-                _createSwitch(
-                  'Gluten Free',
-                  'Only displays gluten-free meals!',
-                  settings.isGlutenFree,
-                  (value) => setState(() {
-                    settings.isGlutenFree = value;
-                  }),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(
+                  color: Colors.grey,
                 ),
-                _createSwitch(
-                  'Lactose Free',
-                  'Only displays lactose-free meals!',
-                  settings.isLactoseFree,
-                  (value) => setState(() {
-                    settings.isLactoseFree = value;
-                  }),
+                borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15)),
+              ),
+              child: Flexible(
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    _createSwitch(
+                      'Gluten Free',
+                      'Only displays gluten-free meals!',
+                      settings.isGlutenFree,
+                      (value) => setState(() {
+                        settings.isGlutenFree = value;
+                      }),
+                    ),
+                    _createSwitch(
+                      'Lactose Free',
+                      'Only displays lactose-free meals!',
+                      settings.isLactoseFree,
+                      (value) => setState(() {
+                        settings.isLactoseFree = value;
+                      }),
+                    ),
+                    _createSwitch(
+                      'Vegan',
+                      'Only displays vegan meals!',
+                      settings.isVegan,
+                      (value) => setState(() {
+                        settings.isVegan = value;
+                      }),
+                    ),
+                    _createSwitch(
+                      'Vegetarian',
+                      'Only displays vegatarian meals!',
+                      settings.isVegetarian,
+                      (value) => setState(() {
+                        settings.isVegetarian = value;
+                      }),
+                    ),
+                  ],
                 ),
-                _createSwitch(
-                  'Vegan',
-                  'Only displays vegan meals!',
-                  settings.isVegan,
-                  (value) => setState(() {
-                    settings.isVegan = value;
-                  }),
-                ),
-                _createSwitch(
-                  'Vegetarian',
-                  'Only displays vegatarian meals!',
-                  settings.isVegetarian,
-                  (value) => setState(() {
-                    settings.isVegetarian = value;
-                  }),
-                ),
-              ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

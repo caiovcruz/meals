@@ -5,7 +5,14 @@ import 'package:flutter/material.dart';
 import '../models/meal.dart';
 
 class CategoryMealDetailScreen extends StatelessWidget {
-  const CategoryMealDetailScreen({Key? key}) : super(key: key);
+  final Function(Meal) onToggleFavorite;
+  final bool Function(Meal) isFavorite;
+
+  const CategoryMealDetailScreen({
+    Key? key,
+    required this.onToggleFavorite,
+    required this.isFavorite,
+  }) : super(key: key);
 
   Widget _createSectionTitle(BuildContext context, String title) {
     return Container(
@@ -37,7 +44,6 @@ class CategoryMealDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final meal = ModalRoute.of(context)?.settings.arguments as Meal;
-    bool isFavorite = Random().nextBool();
     final themeColors = Theme.of(context).colorScheme;
 
     return Scaffold(
@@ -45,14 +51,14 @@ class CategoryMealDetailScreen extends StatelessWidget {
         title: Text(meal.title),
         actions: [
           IconButton(
-            color: isFavorite
+            color: isFavorite(meal)
                 ? themeColors.secondary
                 : HSLColor.fromColor(themeColors.primary)
                     .withLightness(0.1)
                     .toColor()
                     .withOpacity(0.6),
             icon: const Icon(Icons.favorite),
-            onPressed: () {},
+            onPressed: () => onToggleFavorite(meal),
           ),
         ],
       ),
